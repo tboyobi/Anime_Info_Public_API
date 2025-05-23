@@ -3,11 +3,11 @@ import axios from "axios";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const apiKey = process.env.API_KEY;
-if (!apiKey) {
-  console.error("API key is not set. Please set the API_KEY environment variable.");
-  process.exit(1);
-}
+// const apiKey = process.env.API_KEY;
+// if (!apiKey) {
+//   console.error("API key is not set. Please set the API_KEY environment variable.");
+//   process.exit(1);
+// }
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
