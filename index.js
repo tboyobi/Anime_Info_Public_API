@@ -13,7 +13,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index.ejs");
 });
 app.post("/search", async (req, res) => {
   const { query } = req.body;
@@ -26,12 +26,40 @@ app.post("/search", async (req, res) => {
     res.status(500).send("Error fetching anime data");
   }
 });
-app.post("/anime/:id", async (req, res) => {
-  const { id } = req.params;
+
+// Move the /characters route outside of the /anime/:id handler
+app.post("/characters", async (req, res) => {
+  const { id } = req.body; // Use req.body to get id from POST body
   try {
-    const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-    const animeDetails = response.data;
-    res.render("index.ejs", { animeDetails });
+    const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/characters`);
+    const characters = response.data;
+    res.render("index.ejs", { characters });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching anime details");
+  }
+});
+app.post("/episodes", async (req, res) => {
+  const { id } = req.body; // Use req.body to get id from POST body
+  try {
+    const response = await axios.get(
+      `https://api.jikan.moe/v4/anime/${id}/episodes`
+    );
+    const episodes = response.data;
+    res.render("index.ejs", { episodes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching anime details");
+  }
+});
+app.post("/recommendation", async (req, res) => {
+  const { id } = req.body; // Use req.body to get id from POST body
+  try {
+    const response = await axios.get(
+      `https://api.jikan.moe/v4/anime/${id}/recommendations`
+    );
+    const recommendations = response.data;
+    res.render("index.ejs", { recommendations });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching anime details");
