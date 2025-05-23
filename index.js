@@ -33,7 +33,7 @@ app.post("/characters", async (req, res) => {
   try {
     const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/characters`);
     const characters = response.data;
-    res.render("index.ejs", { characters });
+    res.render("characters.ejs", { characters });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching anime details");
@@ -46,7 +46,7 @@ app.post("/episodes", async (req, res) => {
       `https://api.jikan.moe/v4/anime/${id}/episodes`
     );
     const episodes = response.data;
-    res.render("index.ejs", { episodes });
+    res.render("episodes.ejs", { episodes });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching anime details");
@@ -59,7 +59,7 @@ app.post("/recommendation", async (req, res) => {
       `https://api.jikan.moe/v4/anime/${id}/recommendations`
     );
     const recommendations = response.data;
-    res.render("index.ejs", { recommendations });
+    res.render("recommendation.ejs", { recommendations });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching anime details");
