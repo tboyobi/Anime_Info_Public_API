@@ -3,6 +3,11 @@ import axios from "axios";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const apiKey = process.env.API_KEY;
+if (!apiKey) {
+  console.error("API key is not set. Please set the API_KEY environment variable.");
+  process.exit(1);
+}
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -10,23 +15,23 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/search", async (req, res) => {
+app.post("/search", async (req, res) => {
   const { query } = req.body;
   try {
     const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${query}`);
     const anime = response.data;
-    res.render("results", { anime });
+    res.render("index.ejs", { anime });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching anime data");
   }
 });
-app.get("/anime/:id", async (req, res) => {
+app.post("/anime/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
     const animeDetails = response.data;
-    res.render("animeDetails", { animeDetails });
+    res.render("index.ejs", { animeDetails });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching anime details");
