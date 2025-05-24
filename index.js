@@ -7,13 +7,13 @@ const base_URL = "https://api.animechan.io/v1/anime";
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
+app.get("/", (res) => {
   res.render("index.ejs");
 });
 app.post("/name", async (req, res) => {
-  const { name } = req.body;
+  // const { name } = req.body;
   try {
-    const response = await axios.get(`${base_URL}/${name}`);
+    const response = await axios.get(`${base_URL}/`+ req.body);
     const anime = response.data;
     res.render("index.ejs", {
       name: anime.name,
