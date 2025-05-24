@@ -11,9 +11,8 @@ app.get("/", (req, res) => {
   res.render("index.ejs");
 });
 app.post("/name", async (req, res) => {
-  const { name } = req.body;
   try {
-    const response = await axios.get(`${base_URL}`+ name);
+    const response = await axios.get(`${base_URL}`+ req.body);
     const anime = response.data;
     res.render("index.ejs", {
       name: anime.name,

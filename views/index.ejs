@@ -11,12 +11,12 @@
     <form action="/name" method="POST">
       <div>
         <label for="anime-name">Name:</label>
-        <input type="text" id="anime-name" name="name" required />
+        <input type="text" id="anime-name"  required />
       </div>
       <button type="submit">Submit</button>
     </form>
     <div class="anime-info">
-      <% if (anime) { %>
+      <% if (locals.anime) { %>
         <h2>Anime Details</h2>
         <p><strong>Name:</strong> <%= anime.name || 'N/A' %></p>
         <p><strong>ID:</strong> <%= anime.id || 'N/A' %></p>
