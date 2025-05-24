@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anime Recommendation</title>
-</head>
-<body>
- f
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anime info</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+  </head>
+  <body>    
+    <h1>Anime INFO</h1>
+    <form action="/name" method="POST">
+      <div>
+        <label for="anime-name">Name:</label>
+        <input type="text" id="anime-name" name="name" required />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="anime-info">
+      <% if (locals.anime) { %>
+        <h2>Anime Details</h2>
+        <p><strong>Name:</strong> <%= anime.name %></p>
+        <p><strong>ID:</strong> <%= anime.id %></p>
+        <p><strong>Episodes:</strong> <%= anime.episodes %></p>
+        <p><strong>summary:</strong> <%= anime.summary %></p>
+      <% } %>
+  </body>
 </html>
