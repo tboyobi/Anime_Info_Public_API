@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anime info</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>    
     <h1>Anime INFO</h1>
@@ -16,12 +16,12 @@
       <button type="submit">Submit</button>
     </form>
     <div class="anime-info">
-      <% if (locals.anime) { %>
+      <% if (anime) { %>
         <h2>Anime Details</h2>
-        <p><strong>Name:</strong> <%= anime.name %></p>
-        <p><strong>ID:</strong> <%= anime.id %></p>
-        <p><strong>Episodes:</strong> <%= anime.episodes %></p>
-        <p><strong>summary:</strong> <%= anime.summary %></p>
+        <p><strong>Name:</strong> <%= anime.name || 'N/A' %></p>
+        <p><strong>ID:</strong> <%= anime.id || 'N/A' %></p>
+        <p><strong>Episodes:</strong> <%= anime.episodes || 'N/A' %></p>
+        <p><strong>Summary:</strong> <%= anime.summary || 'N/A' %></p>
       <% } %>
   </body>
 </html>
